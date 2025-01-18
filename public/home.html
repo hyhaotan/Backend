@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+    integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <section id="service" class="container">
+      <div class="row gx-4">
+        <div class="col-md-4">
+          <div class="card custom-card text-center p-4">
+            <i class="bi bi-car-front" style="font-size: 4.5rem"></i>
+            <div class="card-body">
+              <h4 class="card-title">Largest Dealership of Cars</h4>
+              <p class="card-text text-justify">
+                Discover a wide range of cars from premium brands with unbeatable deals, ensuring the best choice for
+                your next vehicle.
+              </p>
+              <div class="card-divider mx-auto my-3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card custom-card text-center p-4">
+            <i class="bi bi-tools" style="font-size: 4.5rem"></i>
+            <div class="card-body">
+              <h4 class="card-title">Unlimited Repair Warranty</h4>
+              <p class="card-text text-justify">
+                Enjoy peace of mind with our unlimited repair warranty, covering your vehicle for any unexpected issues
+                or maintenance needs.
+              </p>
+              <div class="card-divider mx-auto my-3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card custom-card text-center p-4">
+            <i class="bi bi-house-heart" style="font-size: 4.5rem"></i>
+            <div class="card-body">
+              <h4 class="card-title">Insurance Support</h4>
+              <p class="card-text text-justify">
+                Get comprehensive insurance support to protect your vehicle and drive with confidence, no matter the
+                journey ahead.
+              </p>
+              <div class="card-divider mx-auto my-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="new-cars" id="new-cars">
+      <p class="fs-5">Checkout the Lastest Cars</p>
+      <h1>Newest Cars</h1>
+      <div class="product-line-divider mx-auto my-3"></div>
+      <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="First slide"></li>
+          <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+          <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active">
+            <div class="row m gap-0">
+              <div class="col-md-6">
+                <img src="./assets/ncm1.png" class="w-100 d-block" alt="First slide" height="300px" />
+              </div>
+              <div class="col-md-4 text-start">
+                <h3>Chevrolet Camaro ZA100</h3>
+                <p>
+                  The Chevrolet Camaro ZA100 is a bold, high-performance muscle car known for its powerful engine and
+                  aggressive design.
+                  Built for speed and comfort, it combines thrilling performance with modern technology.
+                </p>
+                <p>
+                  With a sleek exterior and advanced safety features, the ZA100 stands out as a perfect choice for car
+                  enthusiasts seeking both power and style.
+                </p>
+                <button type="button" class="btn btn-primary py-3 px-4" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row m gap-0">
+              <div class="col-md-6">
+                <img src="./assets/ncm2.png" class="w-100 d-block" alt="First slide" height="300px" />
+              </div>
+              <div class="col-md-4 text-start">
+                <h3>BMW Series-3 Wagon</h3>
+                <p>
+                  The BMW Series-3 Wagon is a blend of luxury and practicality, offering a spacious interior and dynamic
+                  performance.
+                  Its iconic design and smooth handling make it ideal for both city driving and long road trips.
+                </p>
+                <p>
+                  Equipped with state-of-the-art features and an efficient engine, the Series-3 Wagon ensures a premium
+                  driving experience for every journey.
+                </p>
+                <button type="button" class="btn btn-primary py-3 px-4" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row m gap-0">
+              <div class="col-md-6">
+                <img src="./assets/ncm3.png" class="w-100 d-block" alt="First slide" height="300px" />
+              </div>
+              <div class="col-md-4 text-start">
+                <h3>Ferrari 488 Superfast</h3>
+                <p>
+                  The Ferrari 488 Superfast is a masterpiece of Italian engineering, delivering unmatched performance
+                  with its V8 engine and aerodynamic design.
+                  This car is built for those who crave speed and exclusivity.
+                </p>
+                <p>
+                  Featuring cutting-edge technology and luxurious interiors, the 488 Superfast guarantees an
+                  exhilarating driving experience on any road.
+                </p>
+                <button type="button" class="btn btn-primary py-3 px-4" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="bg-featured-cars">
+      <section class="featured-cars container text-center" id="featured-cars">
+        <p class="fs-5">Checkout the Featured Cars</p>
+        <h1>Featured Cars</h1>
+        <div class="product-line-divider mx-auto my-3"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col d-flex justify-content-end mt-3">
+              <div class="input-group" style="width: 300px;">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search..." />
+                <button id="searchButton" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="searchSuggestions" class="mt-3"
+            style="position: absolute; width: 300px; z-index: 10; background-color: white; border: 1px solid #ccc; margin-left: 650px;">
+          </div>
+
+          <div id="searchResults" class="mt-5"></div>
+        </div>
+
+        <div class="row mb-5" id="product-list"></div>
+      </section>
+    </div>
+
+    <div class="bg-best-selling-products">
+      <section class="container best-selling-products">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="list-group small mb-3">
+              <div class="list-group-item text-bg-light fw-bold">
+                Product Categories
+              </div>
+              <a href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                Best Sellers
+                <span class="badge text-bg-warning rounded-pill">14</span>
+              </a>
+              <a href="#"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                New Arrivals
+                <span class="badge text-bg-warning rounded-pill">1</span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="list-group-item bg-list fw-bold d-flex justify-content-between align-items-center">
+              List of Best-Selling Products
+              <span class="badge text-bg-warning rounded-pill">24 Products Available</span>
+            </div>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="row align-items-center g-3">
+                <div class="col-md-4">
+                  <div class="course-image-holder">
+                    <img class="rounded img-fluid mb-md-0 mt-md-> mt-2" src="./assets/fc1.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h5>BMW 6-Series Gran Coupe</h5>
+                  <p class="text-secondary">
+                    The BMW 6-Series Gran Coupe combines luxury and sporty elegance in a four-door design. Ideal for
+                    both long journeys and daily commutes, it delivers a premium experience with advanced features.
+                  </p>
+                  <p class="d-inline-flex align-items-center">
+                    <span class="me-2 rounded-pill text-bg-warning px-2 py-1 small d-inline-flex align-items-center">
+                      <i class="bi bi-star-fill mx-1"></i> Rating: 4.7
+                    </span>
+                    <span class="rounded-pill text-bg-success px-2 py-1 small">
+                      $89,395
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="row align-items-center g-3">
+                <div class="col-md-4">
+                  <div class="course-image-holder">
+                    <img class="rounded img-fluid mb-md-0 mt-md-> mt-2" src="./assets/fc2.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h5 class="text-capitalize">chevrolet camaro wmv20</h5>
+                  <p class="text-secondary">
+                    The Chevrolet Camaro ZA100 is a bold, high-performance muscle car known for its powerful engine and
+                    aggressive design.
+                    Built for speed and comfort, it combines thrilling performance with modern technology.
+                  </p>
+                  <p class="d-inline-flex align-items-center">
+                    <span class="me-2 rounded-pill text-bg-warning px-2 py-1 small d-inline-flex align-items-center">
+                      <i class="bi bi-star-fill mx-1"></i> Rating: 4.7
+                    </span>
+                    <span class="rounded-pill text-bg-success px-2 py-1 small">
+                      $66,575
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="row align-items-center g-3">
+                <div class="col-md-4">
+                  <div class="course-image-holder">
+                    <img class="rounded img-fluid mb-md-0 mt-md-> mt-2" src="./assets/fc3.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h5 class="text-capitalize">lamborghini v520</h5>
+                  <p class="text-secondary">
+                    The Lamborghini V520 stands as a symbol of ultimate luxury and high-performance engineering. Its
+                    sharp design and unmatched power make it a supercar lover's dream.
+                  </p>
+                  <p class="d-inline-flex align-items-center">
+                    <span class="me-2 rounded-pill text-bg-warning px-2 py-1 small d-inline-flex align-items-center">
+                      <i class="bi bi-star-fill mx-1"></i> Rating: 4.7
+                    </span>
+                    <span class="rounded-pill text-bg-success px-2 py-1 small">
+                      $125,250
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="container my-5" id="about-us">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="fw-bold">About DriveX</h2>
+          <p class="text-justify">
+            DriveX is a leading platform specializing in providing premium cars with exceptional quality and
+            performance.
+            We are committed to bringing the latest and most reliable car models to our customers, ensuring every drive
+            is an extraordinary experience.
+          </p>
+          <p class="text-justify">
+            At DriveX, we partner with some of the world’s most renowned car manufacturers, offering a diverse range of
+            vehicles, from luxury sedans to powerful SUVs and high-performance sports cars.
+            Every vehicle is carefully curated to meet the demands of comfort, safety, and cutting-edge technology.
+          </p>
+          <p class="text-justify">
+            Our mission is to create a seamless car-buying journey for our customers, complemented by outstanding
+            customer service.
+            Whether you’re looking for a reliable family car or a stylish ride to make a statement, DriveX is your
+            trusted destination for top-notch automobiles.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="./assets/about_us.jpg" alt="About DriveX" class="img-fluid rounded shadow-sm" />
+        </div>
+      </div>
+    </div>
+
+    <section class="client-side">
+      <h2 class="text-capitalize text-center">what our clients say</h2>
+      <div class="product-line-divider mx-auto mt-3 mb-5"></div>
+      <div id="carouselId" class="carousel slide container" data-bs-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c1.png" alt="Tomas Lili" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "DriveX has completely transformed my driving experience. I purchased my dream car here, and the
+                      entire process was seamless. The car is top-notch, and the customer service was excellent. Highly
+                      recommended!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Tomas Lili <br />
+                      New York
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c2.png" alt="Romi Rain" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "I’ve been using DriveX for years, and they never disappoint. Their wide selection of cars and
+                      attention to detail make them the best in the business. My new car has exceeded all my
+                      expectations!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Romi Rain <br />
+                      London
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c3.png" alt="John Doe" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "From the moment I stepped into DriveX, I was impressed with their professionalism. Their team
+                      helped me find the perfect car that matched my lifestyle and budget. A truly wonderful
+                      experience!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      John Doe <br />
+                      Washington
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c1.png" alt="Tomas Lili" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "DriveX has completely transformed my driving experience. I purchased my dream car here, and the
+                      entire process was seamless. The car is top-notch, and the customer service was excellent. Highly
+                      recommended!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Tomas Lili <br />
+                      New York
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c2.png" alt="Romi Rain" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "I’ve been using DriveX for years, and they never disappoint. Their wide selection of cars and
+                      attention to detail make them the best in the business. My new car has exceeded all my
+                      expectations!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Romi Rain <br />
+                      London
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c3.png" alt="John Doe" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "From the moment I stepped into DriveX, I was impressed with their professionalism. Their team
+                      helped me find the perfect car that matched my lifestyle and budget. A truly wonderful
+                      experience!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      John Doe <br />
+                      Washington
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c1.png" alt="Tomas Lili" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "DriveX has completely transformed my driving experience. I purchased my dream car here, and the
+                      entire process was seamless. The car is top-notch, and the customer service was excellent. Highly
+                      recommended!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Tomas Lili <br />
+                      New York
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c2.png" alt="Romi Rain" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "I’ve been using DriveX for years, and they never disappoint. Their wide selection of cars and
+                      attention to detail make them the best in the business. My new car has exceeded all my
+                      expectations!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      Romi Rain <br />
+                      London
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card clients-card text-center">
+                  <img class="card-img-top mx-auto my-3" src="./assets/c3.png" alt="John Doe" style="width: 70px" />
+                  <div class="card-body">
+                    <p class="card-text text-justify">
+                      "From the moment I stepped into DriveX, I was impressed with their professionalism. Their team
+                      helped me find the perfect car that matched my lifestyle and budget. A truly wonderful
+                      experience!"
+                    </p>
+                    <h5 class="card-title fw-bolder">
+                      John Doe <br />
+                      Washington
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <section class="container brand d-flex align-items-center justify-content-center" id="brand">
+      <div class="row">
+        <div class="col-md-2 p-5">
+          <img src="./assets/br1.png" alt="" />
+        </div>
+        <div class="col-md-2 p-5">
+          <img src="./assets/br2.png" alt="" />
+        </div>
+        <div class="col-md-2 p-5">
+          <img src="./assets/br3.png" alt="" />
+        </div>
+        <div class="col-md-2 p-5">
+          <img src="./assets/br4.png" alt="" />
+        </div>
+        <div class="col-md-2 p-5">
+          <img src="./assets/br5.png" alt="" />
+        </div>
+        <div class="col-md-2 p-5">
+          <img src="./assets/br6.png" alt="" />
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+
+  <script>
+    document.getElementById("searchInput").addEventListener("input", async () => {
+      const searchTerm = document.getElementById("searchInput").value;
+
+      if (searchTerm.trim()) {
+        try {
+          const response = await fetch(`/search?q=${encodeURIComponent(searchTerm)}`);
+          const products = await response.json();
+
+          displaySearchSuggestions(products);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      } else {
+        document.getElementById("searchSuggestions").innerHTML = '';
+      }
+    });
+
+    function displaySearchSuggestions(products) {
+      const suggestionsContainer = document.getElementById("searchSuggestions");
+      suggestionsContainer.innerHTML = "";
+
+      if (products.length === 0) {
+        suggestionsContainer.innerHTML = "<p>No products found</p>";
+      } else {
+        products.forEach((product) => {
+          const suggestionDiv = document.createElement("div");
+          suggestionDiv.classList.add("suggestion-item");
+          suggestionDiv.innerHTML = `
+        <div class="suggestion-item-text">
+          <strong>${product.name}</strong> - ${product.description}
+        </div>
+      `;
+          suggestionsContainer.appendChild(suggestionDiv);
+
+          suggestionDiv.addEventListener("click", () => {
+            document.getElementById("searchInput").value = product.name;
+            document.getElementById("searchSuggestions").innerHTML = '';
+            displayProductDetails(product);
+          });
+        });
+      }
+    }
+
+
+    const carousel = document.querySelector('#carouselId');
+    const carouselInstance = new bootstrap.Carousel(carousel, {
+      interval: 3000,
+      ride: 'carousel',
+      pause: 'hover',
+      wrap: true
+    });
+
+    carousel.addEventListener('slide.bs.carousel', (e) => {
+      console.log(`Slide từ ${e.from} sang ${e.to}`);
+    });
+
+    async function fetchProducts() {
+      try {
+        const response = await fetch("/api/products");
+        const products = await response.json();
+
+        const productList = document.getElementById("product-list");
+        products.forEach((product) => {
+          const productHTML = `
+          <div class="col-md-3">
+            <div class="card card-products">
+              <div class="card-body p-4 d-flex justify-content-center align-items-center">
+                <img class="card-img-top" src="${product.image}" alt="${product.name}" />
+              </div>
+              <div class="card-footer text-start ps-6">
+                <p>Model: ${product.name}</p>
+                <p>Automatic</p>
+              </div>
+            </div>
+            <div class="sub-description">
+              <h6 class="text-capitalize">${product.name}</h6>
+              <p class="fw-bold">$${product.price}</p>
+              <p>${product.description}</p>
+             <button 
+                class="btn btn-info w-100 mt-3 text-white" 
+                style="font-size: 1.1rem" 
+                onclick="handleBuyNow('${product._id}', '${product.name}', '${product.price}', '${product.image}')">
+                Buy Now
+            </button>
+            </div>
+          </div>
+        `;
+          productList.innerHTML += productHTML;
+        });
+      } catch (error) {
+        console.error("Failed to fetch products", error);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchProducts);
+    window.onload = function () {
+      const userLoggedIn = sessionStorage.getItem("userLoggedIn") === "true";
+
+      if (userLoggedIn) {
+        updateMenu();
+      } else {
+        document.getElementById("loginLink").style.display = "block";
+        document.getElementById("registerLink").style.display = "block";
+        document.getElementById("avatarLi").style.display = "none";
+      }
+    };
+
+    function updateMenu() {
+      document.getElementById("loginLink").style.display = "none";
+      document.getElementById("registerLink").style.display = "none";
+
+      const avatarLi = document.getElementById("avatarLi");
+      avatarLi.style.display = "block";
+
+      const userAvatar =
+        sessionStorage.getItem("userAvatar") || "./assets/default.jpg";
+      const avatar = document.getElementById("avatar");
+      if (avatar) {
+        avatar.style.backgroundImage = `url('${userAvatar}')`;
+        avatar.style.backgroundSize = "cover";
+      }
+
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function () {
+          sessionStorage.clear();
+          window.location.href = "/";
+        });
+    }
+
+    window.addEventListener("scroll", function () {
+      var navbar = document.querySelector(".navbar");
+      if (window.scrollY > 0) {
+        navbar.classList.add("navbar-scrolled");
+      } else {
+        navbar.classList.remove("navbar-scrolled");
+      }
+    });
+
+    fetch('/header.html')
+      .then((response) => response.text())
+      .then((html) => {
+        document.getElementById('header').innerHTML = html;
+      });
+
+    fetch('/footer.html')
+      .then((response) => response.text())
+      .then((html) => {
+        document.getElementById('footer').innerHTML = html;
+      });
+
+
+    function handleBuyNow(productId, name, price, image) {
+      fetch("/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, name, quantity: 1, price, image }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+            loadCart();
+          } else {
+            alert("Product added to cart!");
+          }
+        })
+        .catch((error) => console.error("Error adding to cart:", error));
+    };
+  </script>
+</body>
+
+</html>
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">
+          Ferrari 488 Superfast
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="carDetailsAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Key Features
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#carDetailsAccordion">
+              <div class="accordion-body">
+                The Ferrari 488 Superfast boasts an incredible blend of performance, luxury, and design. Its aerodynamic
+                body and sleek lines offer not only visual appeal but also optimal efficiency at high speeds. With
+                advanced safety features, cutting-edge technology, and superior handling, it's a car that is built for
+                both comfort and speed.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Engine
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#carDetailsAccordion">
+              <div class="accordion-body">
+                Powered by a 3.9-liter V8 twin-turbocharged engine, the Ferrari 488 Superfast delivers a maximum output
+                of 660 horsepower and can accelerate from 0 to 60 mph in just 2.8 seconds. This power-packed engine
+                ensures exceptional performance on both city roads and race tracks.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Advantages
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+              data-bs-parent="#carDetailsAccordion">
+              <div class="accordion-body">
+                The Ferrari 488 Superfast offers unparalleled driving experience with its finely tuned suspension
+                system, which guarantees superior stability and control. Additionally, it incorporates innovative
+                technology such as adaptive driving modes and a sophisticated infotainment system, ensuring that every
+                drive is as thrilling as it is comfortable.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-products mt-4">
+          <h4 class="text-warning">Related Cars</h4>
+          <div class="row gx-3">
+            <div class="col-md-4">
+              <div class="card related-products-card">
+                <img class="card-img-top img-thumbnail p-3" src="./assets/ncm1.png" alt="Chevrolet Camaro ZA100" />
+                <p class="card-text text-center text-secondary">
+                  Chevrolet Camaro ZA100
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card related-products-card">
+                <img class="card-img-top img-thumbnail p-3" src="./assets/ncm2.png" alt="BMW Series-3 Wagon" />
+                <p class="card-text text-center text-secondary">
+                  BMW Series-3 Wagon
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card related-products-card">
+                <img class="card-img-top img-thumbnail p-3" src="./assets/ncm3.png" alt="Ferrari 488 Superfast" />
+                <p class="card-text text-center text-secondary">
+                  Ferrari 488 Superfast
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

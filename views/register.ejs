@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      /* Toàn bộ trang */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          #2b2d42 10%,
+          #373f51 40%,
+          #1b262c 70%,
+          #4a4e69 100%
+        );
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f0f0f0;
+      }
+
+      /* Navbar */
+      nav.navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(51, 51, 51, 0.9);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      nav.navbar .navbar-brand {
+        color: #f8f9fa;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav.navbar .nav-link {
+        color: #f8f9fa;
+        transition: color 0.3s ease;
+      }
+
+      nav.navbar .nav-link:hover {
+        color: #ddd;
+      }
+
+      /* Form Container */
+      .form-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        width: 360px;
+        text-align: left;
+        
+      }
+    
+      .form-container h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+        font-size: 1.8rem;
+      }
+
+      .form-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+      }
+      .form-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-container input:focus {
+        border-color: #5cb85c;
+        outline: none;
+        box-shadow: 0 0 5px rgba(20, 23, 20, 0.5);
+      }
+
+      /* Button */
+      .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-container button:hover {
+        background-color: #4cae4c;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        background-color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">DriveX</a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0 fs-6">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#service">SERVICE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#featured-cars">FEATURED CARS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#new-cars">NEW CARS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about-us">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#brand">BRAND</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">CONTACT</a>
+            </li>
+
+            <li id="registerLink" class="nav-item">
+              <a class="nav-link" href="/register">REGISTER</a>
+            </li>
+            <li id="loginLink" class="nav-item">
+              <a class="nav-link" href="/login">LOGIN</a>
+            </li>
+
+            <li id="avatarLi" class="nav-item dropdown" style="display: none">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="avatarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <div id="avatar" class="avatar"></div>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="avatarDropdown"
+                style="
+                  position: absolute;
+                  top: 50px;
+                  left: 0;
+                  transform: translateX(-25%);
+                "
+              >
+                <li>
+                  <a class="dropdown-item" href="profile.ejs">Profile</a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <button id="logoutBtn" class="dropdown-item">Log Out</button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="form-container mt-5">
+      <h2>Sign Up</h2>
+      <form id="registerForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          minlength="6"
+        />
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          required
+          minlength="6"
+        />
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" />
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          const age = document.getElementById("age").value;
+
+          // Kiểm tra mật khẩu khớp
+          if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          // Gửi yêu cầu đến server
+          const response = await fetch("<%= baseUrl %>/api/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username,
+              email,
+              password,
+              confirmPassword,
+              age,
+            }),
+          });
+
+          const result = await response.json();
+          if (response.ok) {
+            alert("Đăng ký thành công");
+            window.location.href = "/";
+          }
+        });
+    </script>
+  </body>
+</html>

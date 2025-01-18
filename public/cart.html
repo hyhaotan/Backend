@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Arial", sans-serif;
+    }
+
+    .cart-header {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #343a40;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      background-color: #fff;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-details {
+      margin-left: 15px;
+    }
+
+    .cart-item-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .cart-item-price {
+      color: #28a745;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .cart-footer {
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-footer .btn {
+      width: 150px;
+    }
+
+    .modal-content {
+      border-radius: 10px;
+    }
+
+    .modal-header {
+      background-color: #f8f9fa;
+    }
+
+    .alert {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header"></div>
+  <div class="container mt-5">
+    <h2 class="cart-header">Giỏ hàng của bạn</h2>
+    <div id="cart-items"></div>
+
+    <div class="modal fade" tabindex="-1" id="editModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Sửa Giỏ Hàng</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editForm">
+              <input type="hidden" id="editCartItemId" />
+              <div class="mb-3">
+                <label for="editQuantity" class="form-label">Số lượng</label>
+                <input type="number" class="form-control" id="editQuantity" min="1" required />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-primary" id="saveEditBtn">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alert-container"></div>
+
+    <a style="display: inline-block; margin-left: auto; margin-right: auto; margin-bottom: 20px; text-align: center;"
+      class="btn btn-primary" href="./pay.html" role="button">
+      Thanh toán
+    </a>
+
+
+  </div>
+
+  <div id="footer"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cartContainer = document.getElementById("cart-items");
+
+      // Hàm tải danh sách giỏ hàng từ server
+      const loadCart = () => {
+        fetch("/cart")
+          .then((response) => response.json())
+          .then((cartItems) => {
+            cartContainer.innerHTML = ""; // Xóa nội dung cũ
+
+            if (cartItems.length === 0) {
+              cartContainer.innerHTML = "<p>Giỏ hàng của bạn hiện tại trống.</p>";
+              return;
+            }
+
+            cartItems.forEach((item) => {
+              const product = item.productId;
+              const cartItemHtml = `
+              <div class="cart-item" data-id="${item._id}">
+                <div class="d-flex align-items-center">
+                  <img src="${item.image || './assets/default.png'}" alt="${item.name}" class="img-fluid" style="width: 50px; height: 50px;" />
+                  <div class="cart-item-details ms-3">
+                    <p class="cart-item-title m-0"><strong>${item.name}</strong></p>
+                    <p class="cart-item-price m-0 text-muted">$${item.price}</p>
+                    <p class="m-0">Số lượng: ${item.quantity}</p>
+                  </div>
+                </div>
+                <div class="cart-item-actions mt-2">
+                  <button class="btn btn-warning btn-sm edit-btn" 
+                    data-cart-id="${item._id}" 
+                    data-quantity="${item.quantity}" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#editModal">Sửa</button>
+                  <button class="btn btn-danger btn-sm delete-btn" 
+                    data-cart-id="${item._id}">Xóa</button>
+                </div>
+              </div>
+            `;
+              cartContainer.innerHTML += cartItemHtml;
+            });
+          })
+          .catch((error) => console.error("Error loading cart:", error));
+      };
+
+      const handleSaveEdit = () => {
+        const productId = document.getElementById("editCartItemId").value;
+        const newQuantity = document.getElementById("editQuantity").value;
+
+        // Kiểm tra tính hợp lệ
+        if (!newQuantity || isNaN(newQuantity) || parseInt(newQuantity, 10) <= 0) {
+          alert("Vui lòng nhập số lượng hợp lệ lớn hơn 0.");
+          return;
+        }
+
+        fetch(`/api/cart/${productId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            quantity: parseInt(newQuantity, 10) || undefined,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.message) {
+              alert(data.message);
+            } else {
+              alert("Cập nhật số lượng thành công.");
+              loadCart(); 
+              const editModal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
+              editModal.hide();
+            }
+          })
+          .catch((error) => {
+            console.error("Error updating cart:", error);
+            alert("Cập nhật thất bại. Vui lòng thử lại.");
+          });
+      };
+
+      const handleDelete = (productId) => {
+        if (confirm("Bạn có chắc muốn xóa sản phẩm này không?")) {
+          fetch(`/api/cart/${productId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.message) {
+                alert(data.message);
+              }
+              loadCart(); // Tải lại giỏ hàng
+            })
+            .catch((error) => {
+              console.error("Error deleting cart item:", error);
+              alert("Xóa sản phẩm thất bại. Vui lòng thử lại.");
+            });
+        }
+      };
+
+      // Gán sự kiện cho các nút trong giỏ hàng
+      cartContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("edit-btn")) {
+          const btn = e.target;
+          document.getElementById("editCartItemId").value = btn.dataset.cartId;
+          document.getElementById("editQuantity").value = btn.dataset.quantity;
+          document.getElementById("editName").value = btn.dataset.name;
+          document.getElementById("editPrice").value = btn.dataset.price;
+          document.getElementById("editImage").value = btn.dataset.image;
+
+          const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+          editModal.show();
+        }
+
+        if (e.target.classList.contains("delete-btn")) {
+          const productId = e.target.dataset.cartId;
+          handleDelete(productId);
+        }
+      });
+
+      // Gán sự kiện cho nút lưu chỉnh sửa
+      document.getElementById("saveEditBtn").addEventListener("click", handleSaveEdit);
+
+      // Tải nội dung giỏ hàng khi trang được tải
+      loadCart();
+
+      // Tải header và footer (nếu cần)
+      fetch("/header.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("header").innerHTML = html;
+        })
+        .catch((error) => console.error("Error loading header:", error));
+
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((html) => {
+          document.getElementById("footer").innerHTML = html;
+        })
+        .catch((error) => console.error("Error loading footer:", error));
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

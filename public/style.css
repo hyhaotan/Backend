@@ -1,0 +1,317 @@
+.form-select {
+  width: 80%;
+  padding: 15px;
+  font-size: 19px;
+  color: rgba(128, 128, 128, 0.807);
+  border: none;
+  background-color: rgba(239, 239, 239, 0.5);
+}
+.bg-banner {
+  position: relative;
+  height: 750px;
+  background-image: url("./assets/welcome-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+  margin-bottom: 200px;
+}
+
+.form {
+  background-color: rgba(255, 255, 255, 1);
+  width: 75%;
+  height: auto;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: -45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15), 0px 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.bg-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(31, 85, 151, 0.25);
+  z-index: 1;
+}
+.banner-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.banner-content p {
+  font-size: 1.25rem;
+}
+
+/* Avatar Styling */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+#avatarDropdown::after {
+  display: none !important;
+}
+.navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.bg-best-selling-products {
+  background-color: rgba(203, 214, 237, 0.25);
+}
+.best-selling-products {
+  padding: 30px 0 20px 0;
+  margin-bottom: 100px;
+}
+.navbar-scrolled {
+  background-color: #000;
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+.navbar .nav-link {
+  color: white !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #dcdcdc !important;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #8e44ad, #2980b9, #27ae60, #2c3e50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.search-btn-container {
+  position: absolute;
+  left: -10%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.container {
+  width: 75%;
+}
+.card-divider {
+  width: 20px;
+  height: 3px;
+  background-color: #0d6efd;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+.product-line-divider {
+  width: 100px;
+  height: 2px;
+  background-color: #0d6efd;
+  border-radius: 2px;
+  margin-top: 8px;
+}
+.m {
+  margin: 80px 0 80px 100px;
+}
+.custom-card {
+  background-color: rgba(247, 247, 253, 0.5);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 5px;
+}
+
+.custom-card .card-title {
+  white-space: nowrap;
+}
+
+.custom-card:hover {
+  background-color: #2369d3;
+  color: white;
+}
+
+.custom-card .card-divider {
+  width: 30px;
+  height: 3px;
+  background-color: #2369d3;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-card:hover .card-divider {
+  background-color: white;
+}
+
+.new-cars {
+  background-color: rgba(203, 214, 237, 0.25);
+  text-align: center;
+  padding: 40px;
+  color: rgba(40, 43, 47, 0.75);
+  margin-bottom: 200px;
+}
+
+#service {
+  margin-top: 300px;
+  margin-bottom: 150px;
+}
+#featured-cars {
+  margin-bottom: 150px;
+}
+.card-footer {
+  color: rgba(40, 43, 47, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.card-footer p {
+  margin: 0;
+}
+.sub-description {
+  text-align: left;
+  margin-top: 30px;
+  color: rgba(40, 43, 47, 0.65);
+}
+.sub-description p {
+  margin: 3px;
+}
+.card-products {
+  height: 260px;
+}
+.client-side {
+  background-color: rgba(203, 214, 237, 0.25);
+  padding: 100px;
+}
+.clients-card {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: rgba(67, 74, 82, 0.85);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.clients-card:hover {
+  background-color: rgba(13, 119, 232, 0.9);
+  color: white;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  display: none;
+}
+.brand {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+.brand .row .col-md-2 img {
+  width: 100%;
+  height: 75px;
+  cursor: pointer;
+}
+footer {
+  background-color: rgba(7, 30, 86, 0.9);
+  color: rgba(235, 234, 234, 0.9);
+  font-size: 15px;
+  line-height: 2.2;
+}
+.footer {
+  padding: 50px;
+}
+footer .footer .row .col-md-3 a {
+  display: block;
+  text-decoration: none;
+  color: rgba(225, 215, 215, 0.85);
+  transition: transform 0.3s ease;
+}
+.form-email input {
+  background-color: rgba(7, 30, 86, 0.9);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.form-email input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.form-email input:focus {
+  background-color: rgba(1, 34, 111, 0.864);
+  outline: none;
+  color: white;
+}
+.footer-divider {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-top: 80px;
+}
+
+footer a:hover {
+  transform: translateX(8px);
+}
+.related-products {
+  background-color: rgba(193, 190, 195, 0.15);
+  margin-top: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+.related-products-card {
+  padding: 5px;
+  height: 160px;
+}
+.related-products-card img {
+  height: 120px;
+}
+.bg-list {
+  background-color: rgba(224, 212, 212, 0.405);
+  border-radius: 5px;
+  padding: 1.5px;
+  color: rgba(59, 54, 54, 0.8);
+}
+
+.carousel .carousel-item {
+  transition: transform 1.5s ease-in-out;
+}
+
+#searchSuggestions {
+  border: 1px solid #ccc;
+  background-color: white;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f1f1f1;
+}
+
+.related-products-container {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.related-products-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

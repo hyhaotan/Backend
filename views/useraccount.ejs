@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        .sidebar {
+            height: 100vh;
+            padding-top: 20px;
+        }
+
+        .nav-link {
+            font-size: 16px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-item .nav-link.active {
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background-color: white;
+            color: black;
+            transition: 500ms;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (Thanh điều hướng bên trái) -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboard">
+                                <i class="bi bi-house-door"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product">
+                                <i class="bi bi-cart"></i>
+                                Product Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/useraccount">
+                                <i class="bi bi-person"></i>
+                                User Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear"></i>
+                                Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">
+                                <i class="bi bi-gear"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Nội dung chính của trang -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <h1 class="text-center mt-4">Admin Dashboard</h1>
+                <h2>User Management</h2>
+                <div class="table-responsive mt-4">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>STT</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <!-- Users data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+
+        </div>
+    </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <script>
+        async function fetchUsers() {
+            try {
+                const response = await fetch('/api/users');
+                const users = await response.json();
+
+                const userTableBody = document.getElementById('userTableBody');
+                userTableBody.innerHTML = '';  // Clear any existing rows
+
+                users.forEach((user, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.age || 'N/A'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="deleteUser('${user._id}')">Delete</button>
+                    </td>
+                `;
+                    userTableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        async function deleteUser(userId) {
+            try {
+                const response = await fetch(`/api/users/${userId}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    alert('User deleted');
+                    fetchUsers();  // Refresh the user list after deletion
+                } else {
+                    alert('Error deleting user');
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchUsers);
+
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Kiểm tra mục nào đã được lưu trong localStorage
+        const activeLink = localStorage.getItem('activeLink');
+        if (activeLink) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === activeLink) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Thêm sự kiện click
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                localStorage.setItem('activeLink', this.getAttribute('href'));
+            });
+        });
+
+    </script>
+</body>
+
+</html>
