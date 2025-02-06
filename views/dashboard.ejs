@@ -145,7 +145,7 @@
 
                 const userResponse = await fetch('/api/users/count');
                 const userData = await userResponse.json();
-                document.getElementById('userCount').textContent = userData.count;
+                document.getElementById('userCount').textContent = userData.totalUsers;
 
                 const revenueResponse = await fetch('/api/payments/total-revenue');
                 const revenueData = await revenueResponse.json();

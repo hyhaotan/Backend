@@ -33,13 +33,36 @@ const paymentSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ["cash", "credit_card", "paypal"],
+      enum: ["cash", "credit_card", "bank_transfer"],
       required: [true, "Payment method is required"],
     },
     paymentStatus: {
       type: String,
       enum: ["pending", "completed", "failed"],
       default: "pending",
+    },
+    // Thông tin khách hàng bao gồm tên, email, số điện thoại và địa chỉ
+    customer: {
+      name: {
+        type: String,
+        required: [true, "Customer name is required"],
+        trim: true,
+      },
+      email: {
+        type: String,
+        required: [true, "Customer email is required"],
+        trim: true,
+      },
+      phone: {
+        type: String,
+        required: [true, "Customer phone is required"],
+        trim: true,
+      },
+      address: {
+        type: String,
+        required: [true, "Customer address is required"],
+        trim: true,
+      },
     },
   },
   {
@@ -48,12 +71,14 @@ const paymentSchema = new mongoose.Schema(
 );
 
 paymentSchema.pre("save", function (next) {
+  // Tính totalPrice cho từng sản phẩm nếu chưa có
   this.cartItems.forEach((item) => {
     if (!item.totalPrice) {
       item.totalPrice = item.quantity * item.price;
     }
   });
 
+  // Tính tổng số tiền thanh toán
   this.totalAmount = this.cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
   if (isNaN(this.totalAmount) || this.totalAmount < 0) {

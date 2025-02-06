@@ -15,28 +15,37 @@ export const getPayment = async (req, res) => {
 
 export const payment = async (req, res) => {
   try {
-    const { cartItems, paymentMethod } = req.body;
+    const { cartItems, paymentMethod, customer } = req.body;
 
-    if (!cartItems || !paymentMethod) {
-      return res.status(400).json({ success: false, message: "Thiếu thông tin giỏ hàng hoặc phương thức thanh toán" });
+    if (!cartItems || !paymentMethod || !customer || !customer.phone) {
+      return res.status(400).json({
+        success: false,
+        message: "Thiếu thông tin giỏ hàng, phương thức thanh toán hoặc thông tin khách hàng (số điện thoại bắt buộc)",
+      });
     }
-
-    // Calculate total amount here to make sure it's accurate before sending it to the model
     let totalAmount = 0;
-    cartItems.forEach((item) => {
+    for (const item of cartItems) {
       if (!item.price || !item.quantity) {
-        return res.status(400).json({ success: false, message: "Sản phẩm thiếu giá hoặc số lượng" });
+        return res.status(400).json({
+          success: false,
+          message: "Sản phẩm thiếu giá hoặc số lượng",
+        });
       }
       item.totalPrice = item.price * item.quantity;
       totalAmount += item.totalPrice;
-    });
+    }
 
-    // Create payment object and save it to database
     const newPayment = new Payment({
       cartItems,
       totalAmount,
       paymentMethod,
       paymentStatus: "pending",
+      customer: {
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        address: customer.address,
+      },
     });
 
     await newPayment.save();
@@ -55,6 +64,7 @@ export const payment = async (req, res) => {
     });
   }
 };
+
 
 export const getTotalRevenue = async (req, res) => {
   try {
