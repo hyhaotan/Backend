@@ -1,4 +1,5 @@
 import Payment from "../model/payment.js";
+import mongoose from "mongoose";
 
 export const getPayment = async (req, res) => {
   try {
@@ -72,7 +73,7 @@ export const getTotalRevenue = async (req, res) => {
       {
         $group: {
           _id: null,
-          totalRevenue: { $sum: "$totalAmount" }, 
+          totalRevenue: { $sum: "$totalAmount" },
         },
       },
     ]);
@@ -81,5 +82,58 @@ export const getTotalRevenue = async (req, res) => {
   } catch (error) {
     console.error("Error fetching total revenue:", error);
     res.status(500).json({ message: "Error fetching total revenue" });
+  }
+};
+
+export const editorder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Id không hợp lệ" });
+    }
+
+    const { status } = req.body;
+    if (!status) {
+      return res.status(400).json({ message: "Trạng thái đơn hàng không được để trống" });
+    }
+
+    const updatedOrder = await Payment.findByIdAndUpdate(
+      id,
+      { paymentStatus: status },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng" });
+    }
+
+    res.status(200).json({
+      message: "Cập nhật trạng thái đơn hàng thành công",
+      order: updatedOrder,
+    });
+  } catch (error) {
+    console.error("Error updating order:", error);
+    res.status(500).json({ message: "Error updating order", error });
+  }
+};
+
+export const deleteorder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Id không hợp lệ" });
+    }
+
+    const deletedOrder = await Payment.findByIdAndDelete(id);
+    if (!deletedOrder) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng" });
+    }
+    res.status(200).json({
+      message: "Xóa đơn hàng thành công",
+      order: deletedOrder,
+    });
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    res.status(500).json({ message: "Error deleting order", error });
   }
 };

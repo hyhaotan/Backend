@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Admin Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        .sidebar {
+            height: 100vh;
+            padding-top: 20px;
+        }
+
+        .nav-link {
+            font-size: 16px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-item .nav-link.active {
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background-color: white;
+            color: black;
+            transition: 500ms;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/dashboard">
+                                <i class="bi bi-house-door"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/order">
+                                <i class="bi bi-house-door"></i>
+                                Order Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product">
+                                <i class="bi bi-cart"></i>
+                                Product Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/useraccount">
+                                <i class="bi bi-person"></i>
+                                User Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-gear"></i>
+                                Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">
+                                <i class="bi bi-gear"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <h1 class="text-center mt-4">Admin Dashboard</h1>
+                <h2 class="mt-4">Quản Lý Đơn Hàng</h2>
+
+                <div class="table-responsive mt-4">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Customer Name</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Total</th>
+                                <th>Payment Method</th>
+                                <th>Payment Status </th>
+                                <th>Act</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal fade" id="viewOrderModal" tabindex="-1" aria-labelledby="viewOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewOrderModalLabel">Chi tiết đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="modalOrderDetails">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editOrderModal" tabindex="-1" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOrderModalLabel">Sửa trạng thái đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editOrderForm">
+                        <div class="mb-3">
+                            <label for="orderStatus" class="form-label">Trạng thái đơn hàng</label>
+                            <select class="form-select" id="orderStatus" name="orderStatus" required>
+                                <option value="pending">Pending</option>
+                                <option value="completed">Completed</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="editOrderId">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" form="editOrderForm" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteOrderModal" tabindex="-1" aria-labelledby="deleteOrderModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteOrderModalLabel">Xác nhận xóa đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa đơn hàng này không?</p>
+                    <input type="hidden" id="deleteOrderId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let ordersData = [];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/api/payment')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Không thể tải dữ liệu đơn hàng');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    ordersData = data;
+                    renderOrders(data);
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tải đơn hàng:", error);
+                    document.getElementById("orderTableBody").innerHTML = `<tr><td colspan="8" class="text-center text-danger">Lỗi tải dữ liệu đơn hàng</td></tr>`;
+                });
+        });
+
+        function renderOrders(data) {
+            const orderTableBody = document.getElementById("orderTableBody");
+            orderTableBody.innerHTML = "";
+
+            if (data.length === 0) {
+                orderTableBody.innerHTML = `<tr><td colspan="8" class="text-center">Không có đơn hàng nào</td></tr>`;
+                return;
+            }
+
+            data.forEach(order => {
+                const row = document.createElement("tr");
+                row.setAttribute("id", `order-${order._id}`);
+                row.innerHTML = `
+                <td>${order._id}</td>
+                <td>${order.customer.name || "N/A"}</td>
+                <td>${order.customer.phone || "N/A"}</td>
+                <td>${order.customer.email || "N/A"}</td>
+                <td>${order.totalAmount ? order.totalAmount.toLocaleString() + " đ" : "0 đ"}</td>
+                <td>${order.paymentMethod}</td>
+                <td id="status-${order._id}">${order.paymentStatus}</td>
+                <td>
+                    <button class="btn btn-info btn-sm me-1 view-order-btn" data-order-id="${order._id}">Xem</button>
+                    <button class="btn btn-warning btn-sm me-1 edit-order-btn" data-order-id="${order._id}">Sửa</button>
+                    <button class="btn btn-danger btn-sm delete-order-btn" data-order-id="${order._id}">Xóa</button>
+                </td>
+                `;
+                orderTableBody.appendChild(row);
+            });
+
+            document.querySelectorAll(".view-order-btn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const orderId = this.getAttribute("data-order-id");
+                    const order = ordersData.find(o => o._id === orderId);
+                    if (order) {
+                        const modalBody = document.getElementById("modalOrderDetails");
+                        let modalContent = `<h5>Danh sách sản phẩm đã mua:</h5>`;
+                        modalContent += `
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                            </thead>
+                            <tbody>`;
+                        order.cartItems.forEach(item => {
+                            modalContent += `
+                            <tr>
+                            <td>${item.name || "Sản phẩm"}</td>
+                            <td>${item.price ? item.price.toLocaleString() + " đ" : "0 đ"}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.totalPrice ? item.totalPrice.toLocaleString() + " đ" : "0 đ"}</td>
+                            </tr>`;
+                        });
+                        modalContent += `
+                            </tbody>
+                        </table>`;
+                        modalContent += `<p><strong>Tổng tiền: </strong>${order.totalAmount ? order.totalAmount.toLocaleString() + " đ" : "0 đ"}</p>`;
+                        modalBody.innerHTML = modalContent;
+
+                        var viewModal = new bootstrap.Modal(document.getElementById('viewOrderModal'));
+                        viewModal.show();
+                    }
+                });
+            });
+
+            document.querySelectorAll(".edit-order-btn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const orderId = this.getAttribute("data-order-id");
+                    const order = ordersData.find(o => o._id === orderId);
+                    if (order) {
+                        document.getElementById("orderStatus").value = order.paymentStatus;
+                        document.getElementById("editOrderId").value = orderId;
+
+                        var editModal = new bootstrap.Modal(document.getElementById('editOrderModal'));
+                        editModal.show();
+                    }
+                });
+            });
+
+            document.querySelectorAll(".delete-order-btn").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    const orderId = this.getAttribute("data-order-id");
+                    document.getElementById("deleteOrderId").value = orderId;
+                    var deleteModal = new bootstrap.Modal(document.getElementById('deleteOrderModal'));
+                    deleteModal.show();
+                });
+            });
+        }
+
+        document.getElementById("editOrderForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const orderId = document.getElementById("editOrderId").value;
+            const newStatus = document.getElementById("orderStatus").value;
+
+            fetch(`/api/payments/${orderId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Lỗi cập nhật trạng thái đơn hàng");
+                    }
+                    return response.json();
+                })
+                .then(updatedOrder => {
+                    const orderIndex = ordersData.findIndex(o => o._id === orderId);
+                    if (orderIndex > -1) {
+                        ordersData[orderIndex].paymentStatus = newStatus;
+                    }
+                    document.getElementById(`status-${orderId}`).innerText = newStatus;
+                    var editModalEl = document.getElementById('editOrderModal');
+                    var modalInstance = bootstrap.Modal.getInstance(editModalEl);
+                    modalInstance.hide();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Có lỗi xảy ra khi cập nhật trạng thái đơn hàng!");
+                });
+        });
+
+        document.getElementById("confirmDeleteBtn").addEventListener("click", function () {
+            const orderId = document.getElementById("deleteOrderId").value;
+
+            fetch(`/api/payments/${orderId}`, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Lỗi xóa đơn hàng");
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    ordersData = ordersData.filter(o => o._id !== orderId);
+                    const row = document.getElementById(`order-${orderId}`);
+                    if (row) {
+                        row.remove();
+                    }
+                    var deleteModalEl = document.getElementById('deleteOrderModal');
+                    var modalInstance = bootstrap.Modal.getInstance(deleteModalEl);
+                    modalInstance.hide();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("Có lỗi xảy ra khi xóa đơn hàng!");
+                });
+        });
+    </script>
+</body>
+
+</html>

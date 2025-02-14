@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,12 +11,14 @@
       background-color: #f8f9fa;
       font-family: "Arial", sans-serif;
     }
+
     .payment-header {
       font-size: 1.8rem;
       font-weight: bold;
       color: #343a40;
       margin-bottom: 20px;
     }
+
     .payment-item {
       background-color: #fff;
       border-radius: 10px;
@@ -26,25 +29,30 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .payment-item img {
       width: 80px;
       height: 80px;
       object-fit: cover;
       border-radius: 8px;
     }
+
     .payment-item-details {
       margin-left: 15px;
       flex-grow: 1;
     }
+
     .payment-item-title {
       font-size: 1.2rem;
       font-weight: bold;
     }
+
     .payment-item-price {
       color: #28a745;
       font-weight: bold;
       font-size: 1.1rem;
     }
+
     .total-section {
       background-color: #fff;
       padding: 20px;
@@ -52,17 +60,20 @@
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
     }
+
     .total-price {
       font-size: 1.5rem;
       font-weight: bold;
       color: #28a745;
     }
+
     .btn-payment {
       width: 100%;
       margin-top: 15px;
     }
   </style>
 </head>
+
 <body>
   <div class="container mt-5">
     <h2 class="payment-header">Xác nhận thanh toán</h2>
@@ -133,7 +144,6 @@
       let totalAmount = 0;
       let cartItems = [];
 
-      // Hàm load giỏ hàng từ API (ví dụ: /cart)
       const loadCart = () => {
         fetch("/cart")
           .then((response) => response.json())
@@ -256,4 +266,5 @@
     });
   </script>
 </body>
+
 </html>

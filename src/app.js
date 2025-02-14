@@ -15,7 +15,7 @@ import paymentRouter from "./routers/payment.js"
 import { addToCart, deleteCartItem, updateCartItem, getCart, clearCart } from "../controllers/cart.js";
 import { users, deleteUser, countUser } from "../controllers/auth.js";
 import { addProduct, countProduct, deleteProduct, getProduct, getProductEdit, searchProduct, updateProduct } from "../controllers/product.js";
-import { getPayment, getTotalRevenue, payment } from "../controllers/payment.js";
+import { getPayment, getTotalRevenue, payment,editorder,deleteorder } from "../controllers/payment.js";
 
 dotenv.config();
 
@@ -87,6 +87,13 @@ app.get("/dashboard", (req, res) => {
   });
 });
 
+app.get("/order", (req, res) => {
+  res.render("order", {
+    baseUrl: process.env.BASE_URL,
+    user: req.session.user || {},
+  });
+});
+
 app.get("/useraccount", (req, res) => {
   res.render("useraccount", {
     baseUrl: process.env.BASE_URL,
@@ -127,5 +134,7 @@ app.get("/search",searchProduct);
 app.get("/api/payment", getPayment);
 app.post("/api/payment", payment);
 app.get("/api/payments/total-revenue",getTotalRevenue);
+app.put('/api/payments/:id', editorder);
+app.delete('/api/payments/:id', deleteorder);
 
 export const viteNodeApp = app;
