@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Profile - DriveX</title>
+    <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -11,77 +12,74 @@
       crossorigin="anonymous"
     />
     <style>
+      /* Đặt phông chữ mặc định, margin, padding */
       body {
         font-family: Arial, sans-serif;
+        background-color: #f8f9fa; /* Màu nền nhạt */
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
       }
+
+      /* Thanh điều hướng cố định trên cùng */
       nav.navbar {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        background-color: #333;
         z-index: 1000;
       }
 
-      nav.navbar .navbar-brand {
-        color: white;
+      /* Chỉnh lại màu chữ cho navbar-brand và nav-link */
+      .navbar-brand, .nav-link {
+        color: #fff !important;
       }
 
-      nav.navbar .nav-link {
-        color: white;
+      /* Style cho phần nội dung chính (profile) */
+      .profile-section {
+        margin-top: 80px; /* chừa chỗ cho navbar */
       }
 
-      nav.navbar .nav-link:hover {
-        color: #ddd;
-      }
-      .profile-container {
-        background: white;
-        padding: 20px;
+      /* Card profile */
+      .profile-card {
+        max-width: 450px;
+        margin: 0 auto; /* Căn giữa ngang */
+        background-color: #fff;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 400px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-card img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-top: -75px;
+        border: 5px solid #fff; /* Tạo đường viền trắng cho avatar */
+      }
+
+      /* Container cho ảnh avatar */
+      .avatar-container {
+        position: relative;
         text-align: center;
+        margin-bottom: 50px;
       }
-      .profile-container h2 {
-        margin-bottom: 10px;
+
+      /* Tiêu đề */
+      .profile-card h2 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
       }
-      .profile-container p {
-        margin: 8px 0;
-      }
-      .form-container {
-        margin-top: 20px;
-      }
-      .form-container input {
-        width: 100%;
-        padding: 10px;
-        margin: 12px 0;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-      }
-      .form-container button {
-        padding: 12px;
-        width: 100%;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .form-container button:hover {
-        background-color: #0056b3;
+
+      /* Nút Chỉnh sửa thông tin */
+      .edit-btn {
+        margin-top: 1rem;
+        text-decoration: none;
       }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="#">DriveX</a>
         <button
@@ -100,24 +98,6 @@
             <li class="nav-item">
               <a class="nav-link active" href="home.html">HOME</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#service">SERVICE</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#featured-cars">FEATURED CARS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#new-cars">NEW CARS</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about-us">ABOUT US</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#brand">BRAND</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">CONTACT</a>
-            </li>
             <li id="avatarLi" class="nav-item dropdown" style="display: none">
               <a
                 class="nav-link dropdown-toggle"
@@ -132,14 +112,11 @@
               <ul
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="avatarDropdown"
-                style="position: absolute; top: 50px; left: 0; transform: translateX(-25%);"
               >
                 <li>
                   <a class="dropdown-item" href="/profile">Profile</a>
                 </li>
-                <li>
-                  <hr class="dropdown-divider" />
-                </li>
+                <li><hr class="dropdown-divider" /></li>
                 <li>
                   <button id="logoutBtn" class="dropdown-item">Log Out</button>
                 </li>
@@ -149,14 +126,37 @@
         </div>
       </div>
     </nav>
-    <div class="profile-container">
-      <h2>Thông tin người dùng</h2>
-      <p><strong>Tên:</strong> <span><%= user.username %></span></p>
-      <p><strong>Email:</strong> <span><%= user.email %></span></p>
-      <p><strong>Tuổi:</strong> <span><%= user.age %></span></p>
-      <img id="avatar" src="<%= user.avatar || '/assets/default.jpg' %>" alt="User Avatar" width="100" />
-      <br>
-      <a href="/editprofile" class="btn btn-primary mt-3">Chỉnh sửa thông tin</a>
+
+    <!-- Profile Section -->
+    <div class="container profile-section">
+      <div class="profile-card py-5 px-4">
+        <div class="avatar-container">
+          <!-- Avatar người dùng -->
+          <img
+            id="avatar"
+            src="<%= user.avatar || '/assets/default.jpg' %>"
+            alt="User Avatar"
+          />
+        </div>
+        <div class="text-center">
+          <!-- Thông tin người dùng -->
+          <h2><%= user.username %></h2>
+          <p class="mb-1"><strong>Email:</strong> <%= user.email %></p>
+          <p class="mb-1"><strong>Tuổi:</strong> <%= user.age %></p>
+
+          <!-- Nút chỉnh sửa thông tin -->
+          <a href="/editprofile" class="btn btn-primary edit-btn">
+            Chỉnh sửa thông tin
+          </a>
+        </div>
+      </div>
     </div>
+
+    <!-- Bootstrap JS (nếu cần dùng cho dropdown, modal,...) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pYQAU5+AiQENABBOAvBlS5ig8tfZ6GDe9TCrH2xd98Yo9Zh1ZpN64LwORlYs9yS1"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
