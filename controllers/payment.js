@@ -21,7 +21,8 @@ export const payment = async (req, res) => {
     if (!cartItems || !paymentMethod || !customer || !customer.phone) {
       return res.status(400).json({
         success: false,
-        message: "Thiếu thông tin giỏ hàng, phương thức thanh toán hoặc thông tin khách hàng (số điện thoại bắt buộc)",
+        message:
+          "Thiếu thông tin giỏ hàng, phương thức thanh toán hoặc thông tin khách hàng (số điện thoại bắt buộc)",
       });
     }
     let totalAmount = 0;
@@ -41,6 +42,7 @@ export const payment = async (req, res) => {
       totalAmount,
       paymentMethod,
       paymentStatus: "pending",
+      orderStatus:"not_received",
       customer: {
         name: customer.name,
         email: customer.email,
@@ -135,5 +137,48 @@ export const deleteorder = async (req, res) => {
   } catch (error) {
     console.error("Error deleting order:", error);
     res.status(500).json({ message: "Error deleting order", error });
+  }
+};
+
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Payment.find({}).sort({ createdAt: -1 });
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng nào" });
+    }
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Lỗi khi tải đơn hàng", error });
+  }
+};
+
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { orderId  } = req.params;
+    const { orderStatus } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(orderId )) {
+      return res.status(400).json({ message: "Id không hợp lệ" });
+    }
+    
+    if (!orderStatus) {
+      return res.status(400).json({ message: "Trạng thái đơn hàng không được để trống" });
+    }
+    
+    const updatedOrder = await Payment.findByIdAndUpdate(
+      orderId ,
+      { orderStatus: orderStatus },
+      { new: true }
+    );
+    
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng" });
+    }
+    
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    console.error("Error updating order status:", error);
+    res.status(500).json({ message: "Lỗi khi cập nhật trạng thái đơn hàng", error });
   }
 };

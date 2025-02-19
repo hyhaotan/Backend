@@ -94,7 +94,8 @@
                                 <th>Email</th>
                                 <th>Total</th>
                                 <th>Payment Method</th>
-                                <th>Payment Status </th>
+                                <th>Payment Status</th>
+                                <th>Order Status</th>
                                 <th>Act</th>
                             </tr>
                         </thead>
@@ -206,7 +207,7 @@
             orderTableBody.innerHTML = "";
 
             if (data.length === 0) {
-                orderTableBody.innerHTML = `<tr><td colspan="8" class="text-center">Không có đơn hàng nào</td></tr>`;
+                orderTableBody.innerHTML = `<tr><td colspan="9" class="text-center">No orders found</td></tr>`;
                 return;
             }
 
@@ -221,10 +222,11 @@
                 <td>${order.totalAmount ? order.totalAmount.toLocaleString() + " đ" : "0 đ"}</td>
                 <td>${order.paymentMethod}</td>
                 <td id="status-${order._id}">${order.paymentStatus}</td>
+                <td id="orderStatus-${order._id}">${order.orderStatus || "N/A"}</td>
                 <td>
-                    <button class="btn btn-info btn-sm me-1 view-order-btn" data-order-id="${order._id}">Xem</button>
-                    <button class="btn btn-warning btn-sm me-1 edit-order-btn" data-order-id="${order._id}">Sửa</button>
-                    <button class="btn btn-danger btn-sm delete-order-btn" data-order-id="${order._id}">Xóa</button>
+                    <button class="btn btn-info btn-sm me-1 view-order-btn" data-order-id="${order._id}">View</button>
+                    <button class="btn btn-warning btn-sm me-1 edit-order-btn" data-order-id="${order._id}">Edit</button>
+                    <button class="btn btn-danger btn-sm delete-order-btn" data-order-id="${order._id}">Delete</button>
                 </td>
                 `;
                 orderTableBody.appendChild(row);
