@@ -1,7 +1,13 @@
+// model/payment.js
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: [true, "Customer email is required"],
+      trim: true,
+    },
     cartItems: [
       {
         name: {
@@ -21,7 +27,7 @@ const paymentSchema = new mongoose.Schema(
         },
         totalPrice: {
           type: Number,
-          required: true, // Total price = quantity * price
+          required: true,
           min: [0, "Total price must be at least 0"],
         },
       },
@@ -41,7 +47,11 @@ const paymentSchema = new mongoose.Schema(
       enum: ["pending", "completed", "failed"],
       default: "pending",
     },
-    // Thông tin khách hàng bao gồm tên, email, số điện thoại và địa chỉ
+    orderStatus: {
+      type: String,
+      enum: ["not_received", "received", "canceled"],
+      default: "not_received",
+    },
     customer: {
       name: {
         type: String,
@@ -71,14 +81,12 @@ const paymentSchema = new mongoose.Schema(
 );
 
 paymentSchema.pre("save", function (next) {
-  // Tính totalPrice cho từng sản phẩm nếu chưa có
   this.cartItems.forEach((item) => {
     if (!item.totalPrice) {
       item.totalPrice = item.quantity * item.price;
     }
   });
 
-  // Tính tổng số tiền thanh toán
   this.totalAmount = this.cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
   if (isNaN(this.totalAmount) || this.totalAmount < 0) {
@@ -88,6 +96,4 @@ paymentSchema.pre("save", function (next) {
   next();
 });
 
-const Payment = mongoose.model("Payment", paymentSchema);
-
-export default Payment;
+export default mongoose.models.Payment || mongoose.model("Payment", paymentSchema);

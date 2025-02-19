@@ -7,6 +7,7 @@ import {
   deleteProduct,
   getProductEdit,
   searchProduct,
+  getProductRelated
 } from "../controllers/product.js";
 
 const router = express.Router();
@@ -17,4 +18,5 @@ router.put('/api/products/:productId', updateProduct);
 router.delete('/api/products/:id', deleteProduct);
 router.get('/api/products/:productId',getProductEdit);
 router.get("/search",searchProduct);
+router.get("/api/products",getProductRelated);
 export default router;

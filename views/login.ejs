@@ -172,41 +172,37 @@
   </div>
 
   <script>
-    document
-      .getElementById("loginForm")
-      .addEventListener("submit", async (e) => {
-        e.preventDefault();
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-        try {
-          const response = await fetch("<%= baseUrl %>/api/signin", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
+      try {
+        const response = await fetch("<%= baseUrl %>/api/signin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-          const result = await response.json();
-          console.log(result);
+        const result = await response.json();
 
-          if (response.ok) {
-            sessionStorage.setItem("userLoggedIn", "true");
-            const username = result.username;
-            window.location.href = "/";
-            document.querySelector(".form-container").style.display = "none";
-            alert("Đăng nhập thành công");
-          } else {
-            alert(result.message || "Login failed!");
-          }
-        } catch (error) {
-          console.error("Error during login:", error);
-          alert("An error occurred during login: " + error.message);
+        if (response.ok) {
+          sessionStorage.setItem("userLoggedIn", "true");
+          sessionStorage.setItem("avatar", result.avatar); // Lưu URL ảnh avatar
+          window.location.href = "/";
+        } else {
+          alert(result.message || "Login failed!");
         }
-      });
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred during login: " + error.message);
+      }
+    });
   </script>
+  <script src="../public/script/auth.js"></script>
 </body>
 
 </html>

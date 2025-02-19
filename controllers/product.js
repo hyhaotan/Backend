@@ -138,3 +138,27 @@ export const searchProduct = async (req, res) => {
   }
 };
 
+
+export const getProductRelated = async (req, res) => {
+  const { productId } = req.query;
+
+  try {
+    // Lấy thông tin sản phẩm hiện tại để biết thuộc tính nào để so sánh (ví dụ: type)
+    const currentProduct = await Product.findById(productId);
+    if (!currentProduct) {
+      return res.status(404).json([]);
+    }
+
+    // Tìm các sản phẩm cùng loại, ngoại trừ sản phẩm hiện tại
+    const relatedProducts = await Product.find({
+      _id: { $ne: productId },
+      type: currentProduct.type,
+    }).limit(4); // Giới hạn số sản phẩm liên quan trả về (có thể điều chỉnh)
+
+    res.json(relatedProducts);
+  } catch (error) {
+    console.error("Error fetching related products:", error);
+    res.status(500).json([]);
+  }
+};
+

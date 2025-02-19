@@ -207,7 +207,6 @@
         const customerAddress = document.getElementById("customer-address").value;
         const paymentMethod = document.getElementById("payment-method").value;
 
-        // Tạo object chứa dữ liệu thanh toán
         const paymentData = {
           cartItems,
           totalAmount,
@@ -220,12 +219,10 @@
           }
         };
 
-        // Ẩn modal
         const modalElement = document.getElementById("paymentModal");
         const modalInstance = bootstrap.Modal.getInstance(modalElement);
         modalInstance.hide();
 
-        // Gửi dữ liệu thanh toán về server (xử lý lưu vào MongoDB phía backend)
         fetch("/api/payment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
